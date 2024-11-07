@@ -18,10 +18,10 @@ class ChatScreen extends StatelessWidget {
         leading: const Padding(
           padding: EdgeInsets.all(4.0),
           child: CircleAvatar(
-            backgroundImage: AssetImage('lib/images/JAVI.png'),
+            backgroundImage: AssetImage('lib/images/JAVI.jpg'),
           ),
         ), //avatar circular
-        title: const Text('JavierMTZ'),
+        title: const Text('Fati Mi amor <3'),
         centerTitle: true, //para forzar centrar el texto
       ),
       body: _ChatView(),

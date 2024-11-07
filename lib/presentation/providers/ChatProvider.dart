@@ -1,4 +1,7 @@
+import "dart:ffi";
+
 import "package:flutter/material.dart";
+import "package:yes_no_app_jesus_ku/config/helpers/get_yes_no_answer.dart";
 import "package:yes_no_app_jesus_ku/domain/entities/message.dart";
 
 class Chatprovider extends ChangeNotifier {
@@ -9,7 +12,10 @@ class Chatprovider extends ChangeNotifier {
 
   //controlador para manejar la posición del scroll
   final ScrollController chatScrollContronller = ScrollController();
-//Enviar un mensaje
+  //instancia de la clase GetYesNoAnswer
+  final getYesNoAnswer = GetYesNoAnswer();
+
+  //Enviar un mensaje
   Future<void> sendMessage(String text) async {
     print('flutter: Cantidad de mensajes: ${messageList.length}');
     if (text.trim().isEmpty) return;
@@ -17,6 +23,9 @@ class Chatprovider extends ChangeNotifier {
     final newMessage = Message(text: text, fromWho: FromWho.me);
     //agrega un elemento a la lista "messageList"
     messageList.add(newMessage);
+    if (text.endsWith('?')) {
+      herReply();
+    }
     //notifica si algo de provider cambió para que se guarde en el estado
     notifyListeners();
     moveScroolToBottom();
@@ -35,5 +44,16 @@ class Chatprovider extends ChangeNotifier {
           //rebote al fina de la animación
           curve: Curves.easeOut);
     }
+  }
+
+  Future<void> herReply() async {
+    //obtener el mensaje de la petición
+    final herMessage = await getYesNoAnswer.getAnswer();
+    //añadir el mensaje de mi crush a lal lista
+    messageList.add(herMessage);
+    //Notifica si algo de provicer cambió para el estado
+    notifyListeners();
+    //mueve el scroll hasta el último mensaje recibido
+    moveScroolToBottom();
   }
 }
