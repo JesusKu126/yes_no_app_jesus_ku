@@ -1,13 +1,11 @@
-import "dart:ffi";
-
 import "package:flutter/material.dart";
 import "package:yes_no_app_jesus_ku/config/helpers/get_yes_no_answer.dart";
 import "package:yes_no_app_jesus_ku/domain/entities/message.dart";
 
 class Chatprovider extends ChangeNotifier {
   List<Message> messageList = [
-    Message(text: 'Hola, Javi', fromWho: FromWho.me),
-    Message(text: 'LLoras porque reprobaste tópicos?', fromWho: FromWho.me),
+    Message(text: 'Hola, mi amor', fromWho: FromWho.me),
+    Message(text: '¿Cómo estás?', fromWho: FromWho.me),
   ];
 
   //controlador para manejar la posición del scroll
