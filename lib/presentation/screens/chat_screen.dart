@@ -13,16 +13,38 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        //leading es el espacio que hay antes del título
-        //se envuenle en padding para que se haga pequeño
-        leading: const Padding(
-          padding: EdgeInsets.all(4.0),
-          child: CircleAvatar(
-            backgroundImage: AssetImage('lib/images/JAVI.jpg'),
+        // Usamos un Column para alinear el avatar y el nombre de forma vertical
+        title: const Row(
+          children: [
+            CircleAvatar(
+              backgroundImage: AssetImage('lib/images/JADE.jpeg'),
+              radius: 20, // Tamaño del avatar
+            ),
+            SizedBox(width: 10), // Espacio entre la imagen y el nombre
+            Column(
+              crossAxisAlignment: CrossAxisAlignment
+                  .start, // Alineamos el nombre a la izquierda
+              children: [
+                Text(
+                  'Jade West',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 4), // Espacio entre el nombre y el subtítulo
+                Text(
+                  'En línea',
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+              ],
+            ),
+          ],
+        ),
+        // Este botón está al final del AppBar, si necesitas agregar un botón
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.settings),
           ),
-        ), //avatar circular
-        title: const Text('Fati Mi amor <3'),
-        centerTitle: true, //para forzar centrar el texto
+        ],
       ),
       body: _ChatView(),
     );
@@ -46,6 +68,7 @@ class _ChatView extends StatelessWidget {
             Expanded(
                 // ListView dice cuantos elementos tengo y puede cambiar, por eso no es const
                 child: ListView.builder(
+              controller: chatProvider.chatScrollController,
               itemCount: chatProvider.messageList.length,
               // Como va a construir cada elemento
               itemBuilder: (context, index) {

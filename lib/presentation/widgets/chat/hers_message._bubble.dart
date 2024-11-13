@@ -114,7 +114,7 @@ class _ImageBubble extends StatelessWidget {
   final String imageUrl;
 
   // Constructor correcto para `_ImageBubble`
-  const _ImageBubble({super.key, required this.imageUrl});
+  const _ImageBubble({required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
